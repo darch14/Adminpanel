@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\company;
 use Illuminate\Http\Request;
 
 class companyController extends Controller
@@ -13,7 +14,7 @@ class companyController extends Controller
      */
     public function index()
     {
-        //
+        return view('companies.home');
     }
 
     /**
@@ -23,7 +24,7 @@ class companyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.addCompany');
     }
 
     /**
@@ -34,7 +35,16 @@ class companyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = new company($request -> all());
+        $file = $request->file('file');
+        $name = 'Company_' . time() . '.' . $file->getClientOriginalName();
+        $path = storage_path('app/public') . '/logos';
+        $file->move($path, $name);
+        $company->logo = $name;
+        $company->save();
+
+        return redirect()->route('home')
+                ->with('notification', '¡Se a Guardado satisfactoriamente!');
     }
 
     /**
