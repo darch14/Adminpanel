@@ -37,7 +37,6 @@ class companyController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input('name'));
         $data = [
             'name' =>$request->input('name'),
             'email' =>$request->input('email'),
@@ -48,12 +47,11 @@ class companyController extends Controller
             'email' => 'email|max:40',
             'file' => 'dimensions:min_width=100,min_height=100'
         ];
-        //$this->validate($request, $rules, $messages);
         $validator = Validator::make($data, $rules);
-        // dd($validator);
         if ($validator -> fails()) {
             return redirect()->back()
-              ->withErrors($validator->errors());
+              ->withErrors($validator->errors())
+              ->withInput();;
         }
 
         $company = new company($request -> all());
@@ -65,7 +63,7 @@ class companyController extends Controller
         $company->save();
 
         return redirect()->route('home')
-                ->with('notification', '¡Se a Guardado satisfactoriamente!');
+                ->with('', '¡Se a Guardado satisfactoriamente!');
     }
 
     /**
@@ -101,27 +99,45 @@ class companyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $company = company::find($id);
-
+        $data = [
+            'name' =>$request->input('name'),
+            'email' =>$request->input('email'),
+            'file' =>$request->file('file')
+        ];
         if (!empty($request->file)) {
-            // $file = $request->file('file');
-            // $name = 'Company_' . time() . '.' . $file->getClientOriginalName();
-            // $path = storage_path('app\public') . '/logos';
-            // $file->move($path, $name);
+            $rules = [
+                'name' => 'required',
+                'email' => 'email|max:40',
+                'file' => 'dimensions:min_width=100,min_height=100'
+            ];
+        }else{
+            $rules = [
+                'name' => 'required',
+                'email' => 'email|max:40'
+            ];
+        }
+        $validator = Validator::make($data, $rules);
+        if ($validator -> fails()) {
+            return redirect()->back()
+              ->withErrors($validator->errors())
+              ->withInput();;
+        }
+
+        $company = company::find($id);
+        if (!empty($request->file)) {
+            $file = $request->file('file');
+            $name = 'Company_' . time() . '.' . $file->getClientOriginalName();
+            $path = storage_path('app\public') . '/logos';
+            $file->move($path, $name);
 
             if (!empty($company->logo)) {
-                dd('no esta vacio');
-            //   Storage::disk('public')->delete('\images\asesores'."\\".$images[0]->name);
-            //   $images[0]->update(['name' => $name]);
-            }else{
-                dd('si esta vacio');
-            //   $images = new image();
-            //   $images->name = $name;
-            //   $images->advisor_id = $advisor->id;
-            //   $images->save();
+                Storage::disk('public')->delete('\logos'."\\".$company->logo);
+                $company->update(['logo' => $name]);
             }
         }
         $company->update($request->all());
+        return redirect()->route('home')
+            ->with('message', '¡Se a modificado satisfactoriamente!');
     }
 
     /**
@@ -132,11 +148,11 @@ class companyController extends Controller
      */
     public function destroy($id)
     {
-        $company = advisor::find($id);
-        $path = '\images\asesores';
+        $company = company::find($id);
+        $path = '\logos';
         Storage::disk('public')->delete($path."\\".$company->logo);
         $company->delete();
-        return redirect()->route('AdvisorAdmin.index')
+        return redirect()->route('home')
             ->with('', '');
     }
 }

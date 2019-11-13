@@ -10,3 +10,13 @@
     </ul>
   </div>
 @endif
+@if (isset($menssage))
+  <div class="alert alert-success" >
+    <button type="button" class="close" data-dismiss="alert" name="button">
+      &times;
+    </button>
+    <ul>
+      <li>{{ $menssage }}</li>
+    </ul>
+  </div>
+@endif

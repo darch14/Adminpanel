@@ -12,6 +12,6 @@ class Employee extends Model
 
     public function companies()
     {
-        return $this->hasOne('App\Company');
+        return $this->belongsTo('App\Company');
     }
 }
