@@ -21,4 +21,10 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'companyController@index')->name('home');
+    Route::get('/homeadd', 'companyController@create')->name('createCompany');
+    Route::get('/home/edit/{id}', 'companyController@edit')->name('editCompany');
+    Route::post('/home', 'companyController@store')->name('storeCompany');
+    Route::put('/home/update/{id}', 'companyController@update')->name('updateCompany1');
+    Route::delete('/home/{id}', 'companyController@destroy')->name('destroyCompany');
+
 });
