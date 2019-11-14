@@ -14,24 +14,24 @@
                 <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{$company->name}}">
+                        <input type="text" class="form-control" name="name" id="name" maxlength="29" placeholder="Name" value="{{$company->name}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{$company->email}}">
+                        <input type="email" class="form-control" name="email" id="email" maxlength="39" placeholder="Email" value="{{$company->email}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputWebsite" class="col-sm-2 control-label">Website</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="website" id="website" placeholder="Website" value="{{$company->website}}">
+                        <input type="text" class="form-control" name="website" id="website" maxlength="49" placeholder="Website" value="{{$company->website}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputFileLogo">Logo</label>
-                    <input type="file" id="inputFileLogo">
+                    <input type="file" name="file" id="inputFileLogo">
                     <p class="help-block"></p>
                 </div>
                 <button type="submit" class="btn btn-success">Save</button>

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header"> company employees {{$company->name}}</div>
                 <div class="card-body">
-                    @include('fragment.message')
+                    <a href="{{route('home')}}" class="btn btn-danger">Back</a>
                     <a href="{{ route('createEmployee', $company->id) }}" class="btn btn-success">Create new employee</a>
                     <br><br>
                     <div class="card">
@@ -24,22 +24,24 @@
                             </thead>
                             <tbody>
                                 @foreach ($employees as $employee)
-                                <td>{{$employee->firt_name.' '.$employee->last_name}}</td>
-                                <td>{{$employee->email}}</td>
-                                <td>{{$employee->phone}}</td>
-                                <td>
-                                    <a href="{{ route('editEmployee', $employee->id) }}" class="btn btn-warning">
-                                        Edit
-                                    </a>
-                                    <a href="{{ route('destroyEmployee', $employee->id) }}" onclick="return confirm('¿Seguro que desea eliminarlo?')" class="btn btn-danger">
-                                        Delete
-                                    </a>
-                                </td>
+                                <tr>
+                                    <td>{{$employee->first_name.' '.$employee->last_name}}</td>
+                                    <td>{{$employee->email}}</td>
+                                    <td>{{$employee->phone}}</td>
+                                    <td>
+                                        <a href="{{ route('editEmployee', $employee->id) }}" class="btn btn-warning">
+                                            Edit
+                                        </a>
+                                        <a href="{{ route('destroyEmployee', $employee->id) }}" onclick="return confirm('¿Seguro que desea eliminarlo?')" class="btn btn-danger">
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         <div class="card-footer">
-                            
+                            {{$render}}
                         </div>
                     </div>
                 </div>

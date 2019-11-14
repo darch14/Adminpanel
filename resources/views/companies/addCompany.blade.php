@@ -13,19 +13,19 @@
                 <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
+                        <input type="text" name="name" class="form-control" id="inputName" maxlength="29" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input type="email" name="email" class="form-control" id="inputEmail" maxlength="39" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputWebsite" class="col-sm-2 control-label">Website</label>
                     <div class="col-sm-10">
-                        <input type="text" name="website" class="form-control" id="inputWebsite" placeholder="Website">
+                        <input type="text" name="website" class="form-control" maxlength="39" id="inputWebsite" placeholder="Website">
                     </div>
                 </div>
                 <div class="form-group">

@@ -25,12 +25,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home/edit/{id}', 'companyController@edit')->name('editCompany');
     Route::post('/home', 'companyController@store')->name('storeCompany');
     Route::put('/home/update/{id}', 'companyController@update')->name('updateCompany');
-    Route::delete('/home/{id}', 'companyController@destroy')->name('destroyCompany');
+    Route::get('/home/{id}', 'companyController@destroy')->name('destroyCompany');
 
     Route::get('/company/{id}', 'employeeController@show')->name('listEmployee');
     Route::get('/employee/add/{id}', 'employeeController@create')->name('createEmployee');
     Route::get('/employee/edit/{id}', 'employeeController@edit')->name('editEmployee');
     Route::post('/employee', 'employeeController@store')->name('storeEmployee');
     Route::put('/employee/update/{id}', 'employeeController@update')->name('updateEmployee');
-    Route::delete('/employee/{id}', 'employeeController@destroy')->name('destroyEmployee');
+    Route::get('/employee/{id}', 'employeeController@destroy')->name('destroyEmployee');
 });

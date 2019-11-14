@@ -11,27 +11,27 @@
             <form class="form-horizontal" action="{{route('storeEmployee')}}" role="form" method="POST" enctype="multipart/form-data" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="inputFirtName" class="col-sm-2 control-label">Firt Name</label>
+                    <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" name="firt_name" class="form-control" id="inputFirtName" placeholder="FirtName">
+                        <input type="text" name="first_name" class="form-control" id="inputFirstName" maxlength="29" placeholder="FirstName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
                     <div class="col-sm-10">
-                        <input type="text" name="last_name" class="form-control" id="inputLastName" placeholder="Last Name">
+                        <input type="text" name="last_name" class="form-control" id="inputLastName" maxlength="29" placeholder="Last Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input type="email" name="email" class="form-control" maxlength="39" id="inputEmail" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
                     <div class="col-sm-10">
-                        <input type="number" name="phone" class="form-control" id="inputphone" placeholder="Phone">
+                        <input type="number" name="phone" class="form-control"  max="999999999" id="inputphone" placeholder="Phone">
                     </div>
                 </div>
                 <input type="text" hidden name="company_id" value="{{$company->id}}">

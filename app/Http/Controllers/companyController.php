@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\company;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class companyController extends Controller
 {
@@ -15,8 +16,10 @@ class companyController extends Controller
      */
     public function index()
     {
-        $companies = company::orderBy('id', 'ASC')->get();
-        return view('companies.home')->with('companies', $companies);
+        $companies = company::orderBy('id', 'ASC')->paginate(10);
+        return view('companies.home')
+            ->with('companies', $companies)
+            ->with('render', $companies->render());
     }
 
     /**
@@ -62,8 +65,7 @@ class companyController extends Controller
         $company->logo = $name;
         $company->save();
 
-        return redirect()->route('home')
-                ->with('', '¡Se a Guardado satisfactoriamente!');
+        return redirect()->route('home');
     }
 
     /**
@@ -131,13 +133,16 @@ class companyController extends Controller
             $file->move($path, $name);
 
             if (!empty($company->logo)) {
+                // dd('1');
                 Storage::disk('public')->delete('\logos'."\\".$company->logo);
                 $company->update(['logo' => $name]);
+            }else{
+                // dd('2');
+                $company->logo = $name;
             }
         }
         $company->update($request->all());
-        return redirect()->route('home')
-            ->with('message', '¡Se a modificado satisfactoriamente!');
+        return redirect()->route('home');
     }
 
     /**
@@ -152,7 +157,6 @@ class companyController extends Controller
         $path = '\logos';
         Storage::disk('public')->delete($path."\\".$company->logo);
         $company->delete();
-        return redirect()->route('home')
-            ->with('', '');
+        return redirect()->route('home');
     }
 }
